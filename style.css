@@ -1,0 +1,238 @@
+
+.box
+{
+    background-image: url("CLUE.png");
+
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+}
+.playbtn{
+    position:absolute;
+    z-index: 1;
+    top: 50%;
+    left:35%;
+    margin:2%;
+}
+#fpara{
+    font-family: 'Courier New', Courier;
+    text-align: justify;
+    font-size: 50px;
+    font-weight: bolder;
+    justify-content: space-between;
+    position:relative;
+}
+#about{
+    text-align: center;
+}
+.description{
+    text-align: center;
+    background-color: aliceblue;
+    color:black;
+    /* border-radius: 15%; */
+    display: flex;
+    flex-direction: row;
+    padding: 5%;
+}
+
+body{
+    background-color: white;
+}
+
+.image2{
+    width: 25%;
+    height: 25%;
+    border-radius: 25%;
+}
+.text{
+    text-align: center;
+    padding-left: 5%;
+}
+
+#foot{
+    background-color: black;
+    padding:5%;
+}
+
+.copyright{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contactus{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.aicon{
+    text-decoration: none;
+    margin:1.5%;
+    color: aliceblue;
+}
+.aicon:hover{
+    color: rgb(185, 188, 191);
+}
+
+
+#dieimage{
+    height:100%;
+    width:100%;
+}
+
+
+.dice{
+    width:50%;
+    height:10%;
+    border: black solid 2px;
+    padding:2%;
+    border-radius:10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+.cardbox{
+    height:10%;
+    width:10%;
+    border: black solid 2px;
+    border-radius: 3%;
+    margin:1.5%;
+}
+
+.cardimage{
+    width:100%;
+    height:100%;
+}
+
+.playercard {
+    outline: none;
+    border: 10px solid #404B69;
+    font-size: 5rem;
+    font-family: 'Arvo', cursive;
+    line-height: 2;
+    font-weight: 900;
+    color: #DA0463;
+    text-shadow: 3px 0 #DBEDF3;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    height: 150px;
+    text-align: center;
+
+    background-color: white;
+
+  }
+
+  .allplayercard{
+    outline: none;
+    border: 2px solid #404B69;
+    font-size: 5rem;
+    font-family: 'Arvo', cursive;
+    /* line-height: 2; */
+    font-weight: 900;
+    color: #DA0463;
+    text-shadow: 3px 0 #DBEDF3;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 50px;
+    height: 100px;
+    text-align: center;
+    background-color: white;
+    margin: 0%;
+  }
+
+
+  element.style {
+    color: rgb(0, 0, 24);
+    min-height: 1492.98px;
+}
+
+nav{
+    position:fixed;
+    right:0;
+}
+
+/* aside {
+    height:100%;
+    width: 100%;
+    float: right;
+    background-color: lightgray;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+
+  } */
+.page{
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+padding: 2%;
+} 
+
+.board{
+    display:flex;
+    width:100%;
+    height:100%;
+}
+#changes{
+    border: #404B69;
+    border-style: solid;
+}
+.detectiveintro{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 2%;
+    background-color: aliceblue;
+    color:black;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    padding: 10px;
+    width: 500px;
+    left: 40%;
+    margin-left: -150px;
+    height:300px;
+    top: 50%;
+    margin-top: -100px;
+    background: #FFF;
+    border: 3px solid ;
+    border-radius: 5%;
+    z-index: 20;
+  }
+  
+  #popup:after {
+    position: fixed;
+    content: "";
+    background: rgba(0,0,0,0.5);
+    z-index: -2;
+  }
+  
+  #popup:before {
+    position: absolute;
+    content: "";
+    background: #FFF;
+    z-index: -1;
+  }
+
+#cardguess{
+    justify-content: center;
+    align-items: center;
+}
+
+#guess1,#guess2,#guess3
+{
+    margin:1%;
+    width:90px;
+}
