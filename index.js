@@ -43,7 +43,6 @@ wss.on('connection', (ws) => {
         
         if(players.length>=3)
         {
-            // wss.broadcast(JSON.stringify({type:"cards",data:2}));
             shuffle(cards);
             console.log(players[0].id);
             players[0].send(JSON.stringify({data:3,card1:cards[0],card2:cards[1],card3:cards[2],card4:cards[3],card5:cards[4]}));
@@ -74,8 +73,6 @@ wss.on('connection', (ws) => {
             player3cards[2]=cards[12];
             player3cards[3]=cards[13];
             player3cards[4]=cards[14];
-
-            
             play();
         }
     }
@@ -90,7 +87,6 @@ function play()
     players[0].send(JSON.stringify({data:4}));
     players[1].send(JSON.stringify({data:5}));
     players[2].send(JSON.stringify({data:6}));
-
     players[0].on('message', (message) => {
        var temp=JSON.parse(message);
        console.log(temp);
@@ -128,7 +124,7 @@ function play()
               var counterguess=JSON.parse(message2);
               if(counterguess.type=="counterguess")
               {
-                players[0].send(JSON.stringify({data:133,ans:counterguess.data}));
+                players[0].send(JSON.stringify({data:123,ans:counterguess.data}));
               }
             })
           }
@@ -139,11 +135,11 @@ function play()
        }
        else if(temp.type=="continue2")//player2 turn
        {
-          players[1].send(JSON.stringify({data:4}));
-          players[2].send(JSON.stringify({data:5}));
-          players[0].send(JSON.stringify({data:6}));
-          players[1].on('message', (message2) => {
-            var temp2=JSON.parse(message2);
+          players[1].send(JSON.stringify({data:7}));
+          players[2].send(JSON.stringify({data:8}));
+          players[0].send(JSON.stringify({data:9}));
+          players[1].on('message', (message3) => {
+            var temp2=JSON.parse(message3);
             if(temp2.type=="guess"){
               if(player1cards.includes(rooms.get(temp2.data[0])) || player1cards.includes(temp2.data[1]) || player1cards.includes(temp2.data[2]))
               {
