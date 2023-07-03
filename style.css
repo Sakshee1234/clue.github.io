@@ -1,4 +1,3 @@
-
 .box
 {
     background-image: url("CLUE.png");
@@ -176,12 +175,8 @@ padding: 2%;
 } 
 
 
-#changes{
-    border: #404B69;
-    border-style: solid;
-}
 #playingnow{
-    display:none;
+    /* display:none; */
     background-color:#6c757d ;
 }
 
@@ -248,14 +243,15 @@ padding: 2%;
 
 .boardbg{
     display: flex;
+
     justify-content: center;
     align-items: center;
-    background-image: url("clue-board.jpg");
     background-size: cover;
     background-repeat: no-repeat;
 }
 .board {
     display: grid;
+    margin-right: 2%;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto auto auto;
     gap: 10px;
@@ -291,8 +287,9 @@ padding: 2%;
     align-items: center;
 }
 
-.weaponsrow{
+#weaponsrow,#weaponsrow2{
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
