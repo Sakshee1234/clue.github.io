@@ -51,6 +51,7 @@ socket.addEventListener('message', (event) =>
     console.log(m);
     if(m.data===0)//card distribute
     {
+        console.log("distributing cards")
         document.getElementById("beforeplaying").style.display="none";
         document.getElementById("playingnow").style.display="block";
         console.log("received");
@@ -67,9 +68,11 @@ socket.addEventListener('message', (event) =>
     }
     else if(m.data===1 || m.data===4 || m.data===7)//p1 die roll
     {
+        document.getElementById("popup").style.display="none";
         guess=[];
         document.getElementById("gamemessages").innerText="Your turn, roll the die";
-        document.getElementById("dieimage").addEventListener('click',function Clickdie(){
+        document.getElementById("dieimage").addEventListener('click',function Clickdie()
+        {
             r=Math.floor(Math.random()*5)+1;
             const el=document.getElementById("dieimage");
             if(el)
@@ -78,12 +81,21 @@ socket.addEventListener('message', (event) =>
             }
             guess.push(r);
             var guessfrom;
-            if(m.data===1)//p1 die roll
+            if(m.data===1)
+            {//p1 die roll
                 guessfrom="guessfrom1";
+                console.log("p1 die roll");
+            }
             else if(m.data===4)//p2 die roll
+            {
+                console.log("p2 die roll");
                 guessfrom="guessfrom2";
-            else
+            }
+            else if(m.data===7)//p3 die roll
+            {
+                console.log("p3 die roll");
                 guessfrom="guessfrom3";
+            }
             el.removeEventListener('click',Clickdie);
             document.getElementById("gamemessages").innerText="You have entered "+rooms.get(r)+" now choose the suspect and suspicious weapon";
             suspect();
@@ -247,38 +259,62 @@ socket.addEventListener('message', (event) =>
                         wb8.style.border=defaultborder;
                       }, 1000);
                     socket.send(JSON.stringify({type:guessfrom,data:guess}));
-                    return;
+
                 }
             }            
         });
     }
     else if(m.data===2 || m.data===3)//p2,p2->p1 is playing
     {
+        document.getElementById("popup").style.display="none";
+        console.log("Player 1's turn");
         document.getElementById("gamemessages").innerText="Player1's turn";
     }
     else if(m.data==5 || m.data==6)//p1,p3->p2 is playing
     {
+        document.getElementById("popup").style.display="none";
+        console.log("Player 2's turn");
         document.getElementById("gamemessages").innerText="Player2's turn";
     }
-    else if(m.data===8 || m.data===9){
+    else if(m.data===8 || m.data===9)
+    {
+        document.getElementById("popup").style.display="none";
+        console.log("Player 3's turn");
         document.getElementById("gamemessages").innerText="Player3's turn";
     }
-    
     else if(m.data===12 || m.data===13 || m.data===21 || m.data===23 || m.data===31 || m.data===32)//p1 guess
     {
         var counterguessfrom;
         if(m.data===12)
+        {
+            console.log("Player 1 has made a guess which you have which one do you want to reveal? asking 2");
             counterguessfrom="counterguessfrom2for1";
+        }
         else if(m.data===13)
+        {
+            console.log("Player 1 has made a guess which you have which one do you want to reveal? asking 3");
             counterguessfrom="counterguessfrom3for1";
+        }
         else if(m.data===21)
+        {
+            console.log("Player 2 has made a guess which you have which one do you want to reveal? asking 1");
             counterguessfrom="counterguessfrom1for2";
+        }
         else if(m.data===23)
+        {
+            console.log("Player 2 has made a guess which you have which one do you want to reveal? asking 3");
             counterguessfrom="counterguessfrom3for2";
+        }
         else if(m.data===31)
+        {
+            console.log("Player 3 has made a guess which you have which one do you want to reveal? asking 1");
             counterguessfrom="counterguessfrom1for3";
-        else
+        }
+        else if(m.data===32)
+        {
+            console.log("Player 3 has made a guess which you have which one do you want to reveal asking 2?");
             counterguessfrom="counterguessfrom2for3";
+        } 
         
         const pop=document.getElementById("popup");
         document.getElementById("pmsg").innerHTML="Player 1 has made a guess which you have which one do you want to reveal?";
@@ -323,7 +359,8 @@ socket.addEventListener('message', (event) =>
         }
         pop.style.display="block";
         guesscards();
-        function guesscards(){
+        function guesscards()
+        {
             const g1=document.getElementById("cguess1");
             const g2=document.getElementById("cguess2");
             const g3=document.getElementById("cguess3");
@@ -339,7 +376,6 @@ socket.addEventListener('message', (event) =>
                 {
                     document.getElementById("cardguess").removeChild(document.getElementById("guess3"));
                 }
-                return;
             })
             if(g2)
             {
@@ -352,11 +388,10 @@ socket.addEventListener('message', (event) =>
                     {
                         document.getElementById("cardguess").removeChild(document.getElementById("guess3"));
                     }
-                    return;
                 })
         
             }
-            if(g3)
+            else if(g3)
             {
                 g3.addEventListener('click',()=>{
                     socket.send(JSON.stringify({type:counterguessfrom,data:g3.src}))
@@ -364,9 +399,7 @@ socket.addEventListener('message', (event) =>
                     document.getElementById("popup").style.display="none";
                     document.getElementById("cardguess").removeChild(document.getElementById("guess2"));
                     document.getElementById("cardguess").removeChild(document.getElementById("guess3"));
-                    return;
                 })
-                
             }
         }
     }
@@ -378,15 +411,23 @@ socket.addEventListener('message', (event) =>
         pop.style.display="block";
         var cont;
         if(m.data===122 || m.data===123)
+        {
+            console.log("Player 2 has your guess");
             cont="continue2";
+        }
         else if(m.data===221 || m.data===223)
+        {
+            console.log("Player 3 has your guess");
             cont="continue3";
-        else
+        }
+        else if(m.data===321 || m.data===322)
+        {
+            console.log("Player 1 has your guess");
             cont="continue1";
+        }
         document.getElementById("cguess1").addEventListener('click',function clickguess1(){
             socket.send(JSON.stringify({type:cont}))
             document.getElementById("popup").style.display="none";
-            document.getElementById("cguess1").removeEventListener('click',clickguess1);
             return;
         })
     }

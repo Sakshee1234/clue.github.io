@@ -44,7 +44,7 @@ wss.on('connection', (ws) =>
   ws.on('message', (message) => 
   {
     const data=JSON.parse(message);
-    if(data.type=="username")
+    if(data.type==="username")
     {
       ws.id=id++;
       players.push(ws);
