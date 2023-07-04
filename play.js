@@ -45,53 +45,6 @@ const sb2=document.getElementById("bcard2");
 const sb3=document.getElementById("bcard3");
 const sb4=document.getElementById("bcard4");
 
-
-function guesscards(counterguessfrom){
-    const g1=document.getElementById("cguess1");
-    const g2=document.getElementById("cguess2");
-    const g3=document.getElementById("cguess3");
-    g1.addEventListener('click',()=>{
-        socket.send(JSON.stringify({type:counterguessfrom,data:g1.src}))
-        g1.removeEventListener('click',g1);
-        document.getElementById("popup").style.display="none";
-        if(g2)
-        {
-            document.getElementById("cardguess").removeChild(document.getElementById("guess2"));
-        }
-        if(g3)
-        {
-            document.getElementById("cardguess").removeChild(document.getElementById("guess3"));
-        }
-        return;
-    })
-    if(g2)
-    {
-        g2.addEventListener('click',()=>{
-            socket.send(JSON.stringify({type:counterguessfrom,data:g2.src}))
-            g2.removeEventListener('click',g2);
-            document.getElementById("popup").style.display="none";
-            document.getElementById("cardguess").removeChild(document.getElementById("guess2"));
-            if(g3)
-            {
-                document.getElementById("cardguess").removeChild(document.getElementById("guess3"));
-            }
-            return;
-        })
-
-    }
-    if(g3)
-    {
-        g3.addEventListener('click',()=>{
-            socket.send(JSON.stringify({type:counterguessfrom,data:g3.src}))
-            g3.removeEventListener('click',g3);
-            document.getElementById("popup").style.display="none";
-            document.getElementById("cardguess").removeChild(document.getElementById("guess2"));
-            document.getElementById("cardguess").removeChild(document.getElementById("guess3"));
-            return;
-        })
-        
-    }
-}
 socket.addEventListener('message', (event) => 
 {
     var m = JSON.parse(event.data);
@@ -119,7 +72,8 @@ socket.addEventListener('message', (event) =>
         document.getElementById("dieimage").addEventListener('click',function Clickdie(){
             r=Math.floor(Math.random()*5)+1;
             const el=document.getElementById("dieimage");
-            if(el){
+            if(el)
+            {
                 el.src=dies[r];
             }
             guess.push(r);
@@ -300,14 +254,14 @@ socket.addEventListener('message', (event) =>
     }
     else if(m.data===2 || m.data===3)//p2,p2->p1 is playing
     {
-        document.getElementById("gamemessages").innerText="Player1 is playing";
+        document.getElementById("gamemessages").innerText="Player1's turn";
     }
     else if(m.data==5 || m.data==6)//p1,p3->p2 is playing
     {
-        document.getElementById("gamemessages").innerText="Player2 is playing";
+        document.getElementById("gamemessages").innerText="Player2's turn";
     }
     else if(m.data===8 || m.data===9){
-        document.getElementById("gamemessages").innerText="Player3 is playing";
+        document.getElementById("gamemessages").innerText="Player3's turn";
     }
     
     else if(m.data===12 || m.data===13 || m.data===21 || m.data===23 || m.data===31 || m.data===32)//p1 guess
@@ -368,7 +322,53 @@ socket.addEventListener('message', (event) =>
             document.getElementById("guess3").appendChild(img2);
         }
         pop.style.display="block";
-        guesscards(counterguessfrom);
+        guesscards();
+        function guesscards(){
+            const g1=document.getElementById("cguess1");
+            const g2=document.getElementById("cguess2");
+            const g3=document.getElementById("cguess3");
+            g1.addEventListener('click',()=>{
+                socket.send(JSON.stringify({type:counterguessfrom,data:g1.src}))
+                g1.removeEventListener('click',g1);
+                document.getElementById("popup").style.display="none";
+                if(g2)
+                {
+                    document.getElementById("cardguess").removeChild(document.getElementById("guess2"));
+                }
+                if(g3)
+                {
+                    document.getElementById("cardguess").removeChild(document.getElementById("guess3"));
+                }
+                return;
+            })
+            if(g2)
+            {
+                g2.addEventListener('click',()=>{
+                    socket.send(JSON.stringify({type:counterguessfrom,data:g2.src}))
+                    g2.removeEventListener('click',g2);
+                    document.getElementById("popup").style.display="none";
+                    document.getElementById("cardguess").removeChild(document.getElementById("guess2"));
+                    if(g3)
+                    {
+                        document.getElementById("cardguess").removeChild(document.getElementById("guess3"));
+                    }
+                    return;
+                })
+        
+            }
+            if(g3)
+            {
+                g3.addEventListener('click',()=>{
+                    socket.send(JSON.stringify({type:counterguessfrom,data:g3.src}))
+                    g3.removeEventListener('click',g3);
+                    document.getElementById("popup").style.display="none";
+                    document.getElementById("cardguess").removeChild(document.getElementById("guess2"));
+                    document.getElementById("cardguess").removeChild(document.getElementById("guess3"));
+                    return;
+                })
+                
+            }
+        }
     }
     else if(m.data===122 || m.data===123 || m.data===221 || m.data===223 || m.data===321 || m.data===322)//which guess is not correct grom p2 or p3(any 1)
     {
@@ -387,12 +387,14 @@ socket.addEventListener('message', (event) =>
             socket.send(JSON.stringify({type:cont}))
             document.getElementById("popup").style.display="none";
             document.getElementById("cguess1").removeEventListener('click',clickguess1);
+            return;
         })
     }
     if(m.data===100)
     {
         document.getElementById("gamemessages").innerText="You have guessed it correct game ends";
     }
+    
 });
 
 
