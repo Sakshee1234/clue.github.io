@@ -204,7 +204,7 @@ wss.on('connection', (ws) =>
     {
       players[2].send(JSON.stringify({data:322,ans:data.data}));
     }
-    else if(data.type==="continue1")
+    else if(data.type==="continue1" )
     {
       players[0].send(JSON.stringify({data:1}));
       players[1].send(JSON.stringify({data:2}));
